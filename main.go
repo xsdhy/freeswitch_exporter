@@ -34,6 +34,12 @@ func main() {
 			"[EXPERIMENTAL] Path to config yaml file that can enable TLS or authentication.",
 		).Default("").String()
 	)
+
+	freeswitchScrapeUri := os.Getenv("FREESWITCH_SCRAPE_URI")
+	if freeswitchScrapeUri != "" {
+		scrapeURI = &freeswitchScrapeUri
+	}
+
 	promlogConfig := &promlog.Config{}
 	kingpin.Version("freeswitch_exporter")
 	logger := promlog.New(promlogConfig)
