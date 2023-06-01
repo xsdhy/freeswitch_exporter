@@ -4,32 +4,37 @@
 
 A [FreeSWITCH](https://freeswitch.org/confluence/display/FREESWITCH/FreeSWITCH+Explained) exporter for Prometheus.
 
-It communicates with FreeSWITCH using [mod_event_socket](https://freeswitch.org/confluence/display/FREESWITCH/mod_event_socket).
+依赖freeswitch的 [mod_event_socket](https://freeswitch.org/confluence/display/FREESWITCH/mod_event_socket)模块.
 
-# Cornerstone
-Some improvements have been made on the basis of these two projects.
-
+## 基石
+本项目基于以下两个项目，更多的说明也可以直接参考。 
 1. [florentchauveau/freeswitch_exporter](https://github.com/florentchauveau/freeswitch_exporter)  
 2. [mroject/freeswitch_exporter](https://github.com/mroject/freeswitch_exporter) 
 
+主要是对上述项目进一步做了如下修改： 
+1、支持nosql运行的freeswitch，当然不可避免的少监控了一些指标 
+2、支持环境变量 
 
-## Getting Started
+## 快速上手
 
-Pre-built static binaries are available in [releases](https://github.com/mroject/freeswitch_exporter/releases).
+### 使用[docker](https://hub.docker.com/r/xsdhy/freeswitch_exporter)运行
 
-docker available in [ghcr.io](https://github.com/mroject/freeswitch_exporter/pkgs/container/freeswitch_exporter)
+```bash
+docker run -d -p 9435:9435 -e FREESWITCH_SCRAPE_URI=tcp://localhost:8021 xsdhy/freeswitch_exporter
+```
 
+### 直接运行
 To run it:
 ```bash
 ./freeswitch_exporter [flags]
 ```
 
-Help on flags:
+支持的参数
 ```
 ./freeswitch_exporter --help
-usage: freeswitch_exporter [<flags>]
+示例: freeswitch_exporter [<flags>]
 
-Flags:
+参数:
       --help                   Show context-sensitive help.
   -l, --web.listen-address=":9435"
                                Address to listen on for web interface and telemetry.
@@ -38,6 +43,7 @@ Flags:
   -u, --freeswitch.scrape-uri="tcp://localhost:8021"
                                URI on which to scrape freeswitch. E.g.
                                "tcp://localhost:8021"
+                               支持使用环境变量 FREESWITCH_SCRAPE_URI
   -t, --freeswitch.timeout=5s  Timeout for trying to get stats from freeswitch.
   -P, --freeswitch.password="ClueCon"
                                Password for freeswitch event socket.
@@ -58,9 +64,6 @@ You can specify the scrape URI with the `--freeswitch.scrape-uri` flag. Example:
 
 Also, you need to make sure that the exporter will be allowed by the ACL (if any), and that the password matches.
 
-## grafana dashboard
-
-import id: **[17071](https://grafana.com/api/dashboards/17071/revisions/1/download)**
 
 ## basic auth
 

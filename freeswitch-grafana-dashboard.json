@@ -2597,12 +2597,8 @@
       {
         "current": {
           "selected": false,
-          "text": "1.14.120.200:9435",
-          "value": "1.14.120.200:9435"
-        },
-        "datasource": {
-          "type": "prometheus",
-          "uid": "5kvB5Hb7k"
+          "text": "localhost:9435",
+          "value": "localhost:9435"
         },
         "definition": "label_values(freeswitch_up, instance)",
         "hide": 0,
