@@ -39,6 +39,10 @@ func main() {
 	if freeswitchScrapeUri != "" {
 		scrapeURI = &freeswitchScrapeUri
 	}
+	envPassword := os.Getenv("FREESWITCH_PASSWORD")
+	if envPassword != "" {
+		password = &envPassword
+	}
 
 	promlogConfig := &promlog.Config{}
 	kingpin.Version("freeswitch_exporter")
